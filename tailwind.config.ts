@@ -1,4 +1,3 @@
-
 import type { Config } from "tailwindcss";
 
 export default {
@@ -63,14 +62,33 @@ export default {
 					border: 'hsl(var(--sidebar-border))',
 					ring: 'hsl(var(--sidebar-ring))'
 				},
-				// Custom colors for Pulse Robot
+				// Custom colors for Solvearn
+				solvearn: {
+					purple: {
+						"50": "#f3f4f6",
+						"100": "#e5e7eb",
+						"200": "#d1d5db",
+						"300": "#9ca3af",
+						"400": "#6b7280",
+						"500": "#8B5CF6", // Primary purple
+						"600": "#7C3AED",
+						"700": "#6D28D9",
+						"800": "#5B21B6",
+						"900": "#4C1D95",
+					},
+					orange: {
+						"500": "#FE5C02", // Solvearn orange
+						"600": "#ea580c",
+					}
+				},
+				// Custom colors for Pulse Robot - keeping for compatibility
 				pulse: {
 					"50": "#fff7ed",
 					"100": "#ffedd5",
 					"200": "#fed7aa",
 					"300": "#fdba74",
 					"400": "#fb923c",
-					"500": "#f97316", // Primary orange
+					"500": "#FE5C02", // Updated to match Solvearn orange
 					"600": "#ea580c",
 					"700": "#c2410c",
 					"800": "#9a3412",
@@ -137,9 +155,9 @@ export default {
 				'float': 'float 6s ease-in-out infinite'
 			},
 			backgroundImage: {
-				'hero-gradient': 'linear-gradient(90deg, hsla(24, 100%, 83%, 1) 0%, hsla(341, 91%, 68%, 1) 100%)',
-				'hero-gradient-2': 'linear-gradient(90deg, hsla(39, 100%, 77%, 1) 0%, hsla(22, 90%, 57%, 1) 100%)',
-				'pulse-gradient': 'linear-gradient(180deg, rgba(249,115,22,0.8) 0%, rgba(249,115,22,0) 100%)',
+				'hero-gradient': 'linear-gradient(135deg, #8B5CF6 0%, #A855F7 50%, #FE5C02 100%)',
+				'solvearn-gradient': 'linear-gradient(135deg, #8B5CF6 0%, #A855F7 50%, #FE5C02 100%)',
+				'pulse-gradient': 'linear-gradient(180deg, rgba(139,92,246,0.8) 0%, rgba(254,92,2,0.8) 100%)',
 			},
 			fontFamily: {
 				'sans': ['Inter', 'sans-serif'],
