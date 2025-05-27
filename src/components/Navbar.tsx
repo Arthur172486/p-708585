@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from "react";
 import { cn } from "@/lib/utils";
 import { Menu, X } from "lucide-react";
+import { Button } from "@/components/ui/button";
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -52,17 +53,17 @@ const Navbar = () => {
             e.preventDefault();
             scrollToTop();
           }}
-          aria-label="Pulse Robot"
+          aria-label="Solvearn"
         >
           <img 
             src="/logo.svg" 
-            alt="Pulse Robot Logo" 
+            alt="Solvearn Logo" 
             className="h-7 sm:h-8" 
           />
         </a>
 
         {/* Desktop Navigation */}
-        <nav className="hidden md:flex space-x-8">
+        <nav className="hidden md:flex items-center space-x-8">
           <a 
             href="#" 
             className="nav-link"
@@ -75,6 +76,12 @@ const Navbar = () => {
           </a>
           <a href="#features" className="nav-link">About</a>
           <a href="#details" className="nav-link">Contact</a>
+          <Button 
+            className="bg-solvearn-purple-500 hover:bg-solvearn-purple-600 text-white"
+            onClick={() => window.location.href = '/dashboard'}
+          >
+            Dashboard
+          </Button>
         </nav>
 
         {/* Mobile menu button - increased touch target */}
@@ -125,6 +132,16 @@ const Navbar = () => {
           >
             Contact
           </a>
+          <Button 
+            className="bg-solvearn-purple-500 hover:bg-solvearn-purple-600 text-white w-full"
+            onClick={() => {
+              window.location.href = '/dashboard';
+              setIsMenuOpen(false);
+              document.body.style.overflow = '';
+            }}
+          >
+            Dashboard
+          </Button>
         </nav>
       </div>
     </header>
