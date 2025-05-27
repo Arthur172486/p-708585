@@ -77,7 +77,7 @@ const Navbar = () => {
           <a href="#features" className="nav-link">About</a>
           <a href="#details" className="nav-link">Contact</a>
           <Button 
-            className="bg-solvearn-purple-500 hover:bg-solvearn-purple-600 text-white"
+            className="bg-orange-500 hover:bg-orange-600 text-white"
             onClick={() => window.location.href = '/dashboard'}
           >
             Dashboard
@@ -133,7 +133,7 @@ const Navbar = () => {
             Contact
           </a>
           <Button 
-            className="bg-solvearn-purple-500 hover:bg-solvearn-purple-600 text-white w-full"
+            className="bg-orange-500 hover:bg-orange-600 text-white w-full"
             onClick={() => {
               window.location.href = '/dashboard';
               setIsMenuOpen(false);

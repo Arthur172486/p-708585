@@ -11,7 +11,7 @@ const activities = [
     project: "EcoTrack App",
     time: "2 hours ago",
     avatar: "SC",
-    color: "bg-solvearn-purple-500",
+    color: "bg-orange-500",
   },
   {
     id: 2,
@@ -20,7 +20,7 @@ const activities = [
     project: "AI Learning Platform",
     time: "4 hours ago",
     avatar: "MJ",
-    color: "bg-blue-500",
+    color: "bg-gray-700",
   },
   {
     id: 3,
@@ -29,7 +29,7 @@ const activities = [
     project: "FinTech Wallet",
     time: "6 hours ago",
     avatar: "ED",
-    color: "bg-solvearn-orange-500",
+    color: "bg-orange-500",
   },
   {
     id: 4,
@@ -38,7 +38,7 @@ const activities = [
     project: "EcoTrack App",
     time: "8 hours ago",
     avatar: "AR",
-    color: "bg-green-500",
+    color: "bg-gray-700",
   },
   {
     id: 5,
@@ -47,15 +47,15 @@ const activities = [
     project: "AI Learning Platform",
     time: "1 day ago",
     avatar: "LW",
-    color: "bg-pink-500",
+    color: "bg-orange-500",
   },
 ];
 
 const TeamActivity = () => {
   return (
-    <Card className="h-fit">
+    <Card className="h-fit bg-white">
       <CardHeader>
-        <CardTitle className="text-xl font-semibold">Team Activity</CardTitle>
+        <CardTitle className="text-xl font-semibold text-gray-900">Team Activity</CardTitle>
       </CardHeader>
       <CardContent>
         <div className="space-y-4">
@@ -68,7 +68,7 @@ const TeamActivity = () => {
                 <div className="flex-1 min-w-0">
                   <p className="text-sm text-gray-900">
                     <span className="font-medium">{activity.user}</span> {activity.action} in{" "}
-                    <span className="font-medium text-solvearn-purple-600">{activity.project}</span>
+                    <span className="font-medium text-orange-600">{activity.project}</span>
                   </p>
                   <p className="text-xs text-gray-500 mt-1">{activity.time}</p>
                 </div>

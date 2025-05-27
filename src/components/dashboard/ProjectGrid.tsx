@@ -76,12 +76,12 @@ const ProjectGrid = () => {
     <div className="space-y-6">
       <div className="flex items-center justify-between">
         <div>
-          <h2 className="text-xl font-semibold text-white">Featured Projects</h2>
-          <p className="text-gray-400 text-sm">Join amazing teams and build the future together</p>
+          <h2 className="text-xl font-semibold text-gray-900">Featured Projects</h2>
+          <p className="text-gray-600 text-sm">Join amazing teams and build the future together</p>
         </div>
         
         <div className="flex space-x-4">
-          <select className="bg-gray-800 border border-gray-700 text-white rounded-lg px-4 py-2 focus:ring-2 focus:ring-purple-500">
+          <select className="bg-white border border-gray-300 text-gray-900 rounded-lg px-4 py-2 focus:ring-2 focus:ring-orange-500">
             <option>All Categories</option>
             <option>Technology</option>
             <option>Business</option>
@@ -90,7 +90,7 @@ const ProjectGrid = () => {
             <option>Community</option>
           </select>
           
-          <select className="bg-gray-800 border border-gray-700 text-white rounded-lg px-4 py-2 focus:ring-2 focus:ring-purple-500">
+          <select className="bg-white border border-gray-300 text-gray-900 rounded-lg px-4 py-2 focus:ring-2 focus:ring-orange-500">
             <option>All Status</option>
             <option>Recruiting</option>
             <option>Funding</option>

@@ -9,45 +9,45 @@ const quickActions = [
     icon: Plus,
     title: "Create New Project",
     description: "Start a new project and find team members",
-    color: "bg-solvearn-purple-500 hover:bg-solvearn-purple-600",
+    color: "bg-orange-500 hover:bg-orange-600",
   },
   {
     icon: Search,
     title: "Join a Team",
     description: "Browse and apply to existing projects",
-    color: "bg-blue-500 hover:bg-blue-600",
+    color: "bg-gray-700 hover:bg-gray-800",
   },
   {
     icon: Calendar,
     title: "Join Hackathon",
     description: "Participate in this month's competition",
-    color: "bg-solvearn-orange-500 hover:bg-solvearn-orange-600",
+    color: "bg-orange-500 hover:bg-orange-600",
   },
   {
     icon: Users,
     title: "Find Mentors",
     description: "Connect with experienced entrepreneurs",
-    color: "bg-green-500 hover:bg-green-600",
+    color: "bg-gray-700 hover:bg-gray-800",
   },
   {
     icon: MessageSquare,
     title: "Team Chat",
     description: "Message your team members",
-    color: "bg-purple-500 hover:bg-purple-600",
+    color: "bg-orange-500 hover:bg-orange-600",
   },
   {
     icon: Trophy,
     title: "View Leaderboard",
     description: "See top performing teams",
-    color: "bg-yellow-500 hover:bg-yellow-600",
+    color: "bg-gray-700 hover:bg-gray-800",
   },
 ];
 
 const QuickActions = () => {
   return (
-    <Card>
+    <Card className="bg-white">
       <CardHeader>
-        <CardTitle className="text-xl font-semibold">Quick Actions</CardTitle>
+        <CardTitle className="text-xl font-semibold text-gray-900">Quick Actions</CardTitle>
       </CardHeader>
       <CardContent>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -55,7 +55,7 @@ const QuickActions = () => {
             <Button
               key={index}
               variant="outline"
-              className="h-auto p-4 flex flex-col items-start space-y-2 hover:shadow-md transition-all"
+              className="h-auto p-4 flex flex-col items-start space-y-2 hover:shadow-md transition-all border-gray-200"
             >
               <div className={`p-2 rounded-lg ${action.color} text-white`}>
                 <action.icon className="h-5 w-5" />

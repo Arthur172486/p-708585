@@ -10,8 +10,8 @@ const stats = [
     change: "+12%",
     changeType: "positive",
     icon: FolderKanban,
-    color: "text-solvearn-purple-600",
-    bgColor: "bg-solvearn-purple-100",
+    color: "text-orange-600",
+    bgColor: "bg-orange-100",
   },
   {
     title: "Team Members",
@@ -19,8 +19,8 @@ const stats = [
     change: "+25%",
     changeType: "positive",
     icon: Users,
-    color: "text-blue-600",
-    bgColor: "bg-blue-100",
+    color: "text-gray-600",
+    bgColor: "bg-gray-100",
   },
   {
     title: "Hackathon Wins",
@@ -28,7 +28,7 @@ const stats = [
     change: "0%",
     changeType: "neutral",
     icon: Trophy,
-    color: "text-solvearn-orange-600",
+    color: "text-orange-600",
     bgColor: "bg-orange-100",
   },
   {
@@ -46,7 +46,7 @@ const DashboardStats = () => {
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
       {stats.map((stat, index) => (
-        <Card key={index} className="hover:shadow-md transition-shadow">
+        <Card key={index} className="hover:shadow-md transition-shadow bg-white">
           <CardContent className="p-6">
             <div className="flex items-center justify-between">
               <div>

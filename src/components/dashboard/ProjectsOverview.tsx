@@ -14,7 +14,7 @@ const projects = [
     teamSize: 4,
     dueDate: "Dec 15, 2024",
     status: "In Progress",
-    color: "border-l-solvearn-purple-500",
+    color: "border-l-orange-500",
   },
   {
     id: 2,
@@ -24,7 +24,7 @@ const projects = [
     teamSize: 6,
     dueDate: "Jan 20, 2025",
     status: "Development",
-    color: "border-l-blue-500",
+    color: "border-l-gray-700",
   },
   {
     id: 3,
@@ -34,16 +34,16 @@ const projects = [
     teamSize: 3,
     dueDate: "Nov 30, 2024",
     status: "Testing",
-    color: "border-l-solvearn-orange-500",
+    color: "border-l-orange-500",
   },
 ];
 
 const ProjectsOverview = () => {
   return (
-    <Card>
+    <Card className="bg-white">
       <CardHeader className="flex flex-row items-center justify-between">
-        <CardTitle className="text-xl font-semibold">My Projects</CardTitle>
-        <Button variant="outline" size="sm">
+        <CardTitle className="text-xl font-semibold text-gray-900">My Projects</CardTitle>
+        <Button variant="outline" size="sm" className="border-gray-200">
           View All
         </Button>
       </CardHeader>
@@ -77,8 +77,8 @@ const ProjectsOverview = () => {
                       <span>{project.dueDate}</span>
                     </div>
                     <span className={`px-2 py-1 rounded-full text-xs font-medium ${
-                      project.status === 'In Progress' ? 'bg-blue-100 text-blue-700' :
-                      project.status === 'Development' ? 'bg-yellow-100 text-yellow-700' :
+                      project.status === 'In Progress' ? 'bg-orange-100 text-orange-700' :
+                      project.status === 'Development' ? 'bg-gray-100 text-gray-700' :
                       'bg-green-100 text-green-700'
                     }`}>
                       {project.status}
