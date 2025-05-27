@@ -1,6 +1,15 @@
 
-import React from "react";
+import React, { useState } from "react";
 import ProjectCard from "./ProjectCard";
+import { Button } from "@/components/ui/button";
+import { Search, Filter } from "lucide-react";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 
 const projects = [
   {
@@ -72,35 +81,74 @@ const projects = [
 ];
 
 const ProjectGrid = () => {
+  const [searchTerm, setSearchTerm] = useState("");
+  const [selectedCategory, setSelectedCategory] = useState("all");
+  const [selectedStatus, setSelectedStatus] = useState("all");
+
+  const filteredProjects = projects.filter(project => {
+    const matchesSearch = project.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                         project.description.toLowerCase().includes(searchTerm.toLowerCase());
+    const matchesCategory = selectedCategory === "all" || project.category === selectedCategory;
+    const matchesStatus = selectedStatus === "all" || project.status === selectedStatus;
+    
+    return matchesSearch && matchesCategory && matchesStatus;
+  });
+
   return (
     <div className="space-y-6">
-      <div className="flex items-center justify-between">
+      <div className="flex flex-col sm:flex-row gap-4 items-start sm:items-center justify-between">
         <div>
-          <h2 className="text-xl font-semibold text-gray-900">Featured Projects</h2>
-          <p className="text-gray-600 text-sm">Join amazing teams and build the future together</p>
+          <h1 className="text-2xl font-bold text-white dark:text-white">Descobrir Projetos</h1>
+          <p className="text-gray-400 dark:text-gray-400">Encontre projetos incríveis para participar</p>
         </div>
         
-        <div className="flex space-x-4">
-          <select className="bg-white border border-gray-300 text-gray-900 rounded-lg px-4 py-2 focus:ring-2 focus:ring-orange-500">
-            <option>All Categories</option>
-            <option>Technology</option>
-            <option>Business</option>
-            <option>Marketing</option>
-            <option>AI/Tech</option>
-            <option>Community</option>
-          </select>
-          
-          <select className="bg-white border border-gray-300 text-gray-900 rounded-lg px-4 py-2 focus:ring-2 focus:ring-orange-500">
-            <option>All Status</option>
-            <option>Recruiting</option>
-            <option>Funding</option>
-            <option>Active</option>
-          </select>
+        <Button className="bg-orange-500 hover:bg-orange-600 text-white">
+          Criar Projeto
+        </Button>
+      </div>
+
+      <div className="flex flex-col sm:flex-row gap-4">
+        <div className="relative flex-1">
+          <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400" />
+          <input
+            type="text"
+            placeholder="Buscar projetos..."
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+            className="pl-10 pr-4 py-2 w-full bg-gray-800 border border-gray-700 rounded-lg text-white placeholder-gray-400 focus:ring-2 focus:ring-orange-500 focus:border-transparent"
+          />
         </div>
+        
+        <Select value={selectedCategory} onValueChange={setSelectedCategory}>
+          <SelectTrigger className="w-full sm:w-48 bg-gray-800 border-gray-700 text-white">
+            <SelectValue placeholder="Categoria" />
+          </SelectTrigger>
+          <SelectContent className="bg-gray-800 border-gray-700">
+            <SelectItem value="all">Todas Categorias</SelectItem>
+            <SelectItem value="Technology">Tecnologia</SelectItem>
+            <SelectItem value="Business">Negócios</SelectItem>
+            <SelectItem value="Marketing">Marketing</SelectItem>
+            <SelectItem value="AI/Tech">IA/Tech</SelectItem>
+            <SelectItem value="Community">Comunidade</SelectItem>
+            <SelectItem value="Travel">Viagem</SelectItem>
+          </SelectContent>
+        </Select>
+        
+        <Select value={selectedStatus} onValueChange={setSelectedStatus}>
+          <SelectTrigger className="w-full sm:w-48 bg-gray-800 border-gray-700 text-white">
+            <SelectValue placeholder="Status" />
+          </SelectTrigger>
+          <SelectContent className="bg-gray-800 border-gray-700">
+            <SelectItem value="all">Todos Status</SelectItem>
+            <SelectItem value="Recruiting">Recrutando</SelectItem>
+            <SelectItem value="Funding">Financiamento</SelectItem>
+            <SelectItem value="Active">Ativo</SelectItem>
+          </SelectContent>
+        </Select>
       </div>
       
       <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-6">
-        {projects.map((project) => (
+        {filteredProjects.map((project) => (
           <ProjectCard key={project.id} project={project} />
         ))}
       </div>

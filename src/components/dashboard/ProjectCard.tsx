@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { ChevronDown, Users, ArrowRight } from "lucide-react";
+import { ChevronDown, Users, ArrowRight, User } from "lucide-react";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -27,7 +27,7 @@ interface ProjectCardProps {
 }
 
 const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
-  const [isExpanded, setIsExpanded] = useState(false);
+  const [appliedRole, setAppliedRole] = useState<string | null>(null);
 
   const getStatusColor = (status: string) => {
     switch (status) {
@@ -42,8 +42,14 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
     }
   };
 
+  const handleApply = (role: string) => {
+    setAppliedRole(role);
+    // Aqui você pode adicionar lógica para enviar a candidatura
+    console.log(`Candidatura enviada para ${role} no projeto ${project.title}`);
+  };
+
   return (
-    <Card className="bg-gray-900 border-gray-800 hover:border-purple-500 transition-all duration-300 group overflow-hidden">
+    <Card className="bg-gray-800 border-gray-700 hover:border-orange-500 transition-all duration-300 group overflow-hidden">
       <div className="relative">
         <img 
           src={project.image} 
@@ -56,7 +62,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
           </span>
         </div>
         <div className="absolute top-4 left-4">
-          <span className="px-3 py-1 rounded-full text-xs font-medium bg-gray-800 text-gray-300">
+          <span className="px-3 py-1 rounded-full text-xs font-medium bg-gray-900 text-gray-300">
             {project.category}
           </span>
         </div>
@@ -65,7 +71,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
       <CardContent className="p-6">
         <div className="space-y-4">
           <div>
-            <h3 className="text-lg font-semibold text-white group-hover:text-purple-400 transition-colors">
+            <h3 className="text-lg font-semibold text-white group-hover:text-orange-400 transition-colors">
               {project.title}
             </h3>
             <p className="text-gray-400 text-sm mt-2 line-clamp-3">
@@ -75,7 +81,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
           
           <div className="flex flex-wrap gap-2">
             {project.tags.map((tag, index) => (
-              <span key={index} className="px-2 py-1 bg-gray-800 text-gray-300 rounded text-xs">
+              <span key={index} className="px-2 py-1 bg-gray-700 text-gray-300 rounded text-xs">
                 {tag}
               </span>
             ))}
@@ -84,51 +90,70 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
           <div className="flex items-center justify-between">
             <div className="flex items-center text-gray-400 text-sm">
               <Users className="h-4 w-4 mr-1" />
-              <span>{project.members} members</span>
+              <span>{project.members} membros</span>
             </div>
             
-            <DropdownMenu>
-              <DropdownMenuTrigger asChild>
-                <Button 
-                  variant="outline" 
-                  size="sm" 
-                  className="bg-gray-800 border-gray-700 text-white hover:bg-gray-700"
-                >
-                  Looking for <ChevronDown className="h-4 w-4 ml-1" />
-                </Button>
-              </DropdownMenuTrigger>
-              <DropdownMenuContent className="bg-gray-800 border-gray-700 w-56">
-                <div className="p-2">
-                  <p className="text-sm font-medium text-white mb-2">Needed roles:</p>
-                  {project.needed.map((role, index) => (
-                    <DropdownMenuItem key={index} className="text-gray-300 hover:bg-gray-700 hover:text-white">
-                      <div className="flex items-center justify-between w-full">
-                        <span>{role}</span>
-                        <Button size="sm" variant="ghost" className="h-6 px-2 text-purple-400 hover:text-purple-300">
-                          Apply
-                        </Button>
-                      </div>
-                    </DropdownMenuItem>
-                  ))}
-                </div>
-              </DropdownMenuContent>
-            </DropdownMenu>
+            <div className="flex items-center text-gray-400 text-sm">
+              <span>{project.needed.length} vagas</span>
+            </div>
+          </div>
+          
+          <div className="space-y-2">
+            <p className="text-sm text-gray-400">Procurando por:</p>
+            <div className="flex flex-wrap gap-1">
+              {project.needed.map((role, index) => (
+                <span key={index} className="px-2 py-1 bg-gray-700 text-gray-300 rounded text-xs">
+                  {role}
+                </span>
+              ))}
+            </div>
           </div>
           
           <div className="flex space-x-2 pt-2">
             <Button 
-              className="flex-1 bg-purple-600 hover:bg-purple-700 text-white"
+              className="flex-1 bg-orange-500 hover:bg-orange-600 text-white"
               size="sm"
             >
-              View Details <ArrowRight className="h-4 w-4 ml-1" />
+              Ver Detalhes <ArrowRight className="h-4 w-4 ml-1" />
             </Button>
-            <Button 
-              variant="outline" 
-              size="sm"
-              className="bg-gray-800 border-gray-700 text-white hover:bg-gray-700"
-            >
-              Join Team
-            </Button>
+            
+            {appliedRole ? (
+              <Button 
+                variant="outline" 
+                size="sm"
+                disabled
+                className="bg-green-600 border-green-600 text-white"
+              >
+                Candidatado como {appliedRole}
+              </Button>
+            ) : (
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <Button 
+                    variant="outline" 
+                    size="sm"
+                    className="bg-gray-700 border-gray-600 text-white hover:bg-gray-600"
+                  >
+                    Se Candidatar <ChevronDown className="h-4 w-4 ml-1" />
+                  </Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent className="bg-gray-800 border-gray-700 w-56">
+                  <div className="p-2">
+                    <p className="text-sm font-medium text-white mb-2">Escolha sua especialidade:</p>
+                    {project.needed.map((role, index) => (
+                      <DropdownMenuItem 
+                        key={index} 
+                        className="text-gray-300 hover:bg-gray-700 hover:text-white cursor-pointer"
+                        onClick={() => handleApply(role)}
+                      >
+                        <User className="h-4 w-4 mr-2" />
+                        {role}
+                      </DropdownMenuItem>
+                    ))}
+                  </div>
+                </DropdownMenuContent>
+              </DropdownMenu>
+            )}
           </div>
         </div>
       </CardContent>
