@@ -70,7 +70,7 @@ const ProjectCard = ({ project }: ProjectCardProps) => {
                   <DropdownMenuItem key={index} className="cursor-default">
                     <div className="flex items-center justify-between w-full">
                       <span className="text-sm">{role}</span>
-                      <Badge variant="outline" size="sm">Aberta</Badge>
+                      <Badge variant="outline" className="text-xs">Aberta</Badge>
                     </div>
                   </DropdownMenuItem>
                 ))}

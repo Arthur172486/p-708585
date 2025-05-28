@@ -1,8 +1,9 @@
+
 import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent } from "@/components/ui/card";
-import { Search, Filter, Grid, List } from "lucide-react";
+import { Search, Filter, Grid, List, Plus } from "lucide-react";
 import ProjectCard from "@/components/dashboard/ProjectCard";
 import GlassHeader from "@/components/ui/glass-header";
 import {
@@ -13,7 +14,6 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Link } from "react-router-dom";
-import Plus from "lucide-react";
 
 const Dashboard = () => {
   const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid');

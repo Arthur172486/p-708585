@@ -3,7 +3,7 @@ import React from "react";
 import { useParams } from "react-router-dom";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Button } from "@/components/ui/button";
-import { MessageCircle, TrendingUp, Settings } from "lucide-react";
+import { MessageCircle, TrendingUp, Settings, Users } from "lucide-react";
 import { Link } from "react-router-dom";
 import GlassHeader from "@/components/ui/glass-header";
 import ProjectOverview from "@/components/project/ProjectOverview";
