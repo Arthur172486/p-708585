@@ -25,118 +25,115 @@ interface ProjectCardProps {
 
 const ProjectCard = ({ project }: ProjectCardProps) => {
   const statusColors = {
-    Recruiting: "bg-gradient-to-r from-emerald-500 to-teal-600 text-white",
-    Active: "bg-gradient-to-r from-blue-500 to-indigo-600 text-white",
-    Funding: "bg-gradient-to-r from-purple-500 to-violet-600 text-white"
+    Recruiting: "bg-gradient-to-r from-emerald-600 to-teal-700 text-white",
+    Active: "bg-gradient-to-r from-blue-600 to-indigo-700 text-white",
+    Funding: "bg-gradient-to-r from-slate-600 to-gray-700 text-white"
   };
 
   return (
-    <Card className="group relative h-full bg-gradient-to-br from-white via-gray-50 to-gray-100 dark:from-gray-800 dark:via-gray-800 dark:to-gray-900 border-0 shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 overflow-hidden">
+    <Card className="group relative h-full bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 shadow-sm hover:shadow-lg transition-all duration-300 hover:-translate-y-1 overflow-hidden">
       {/* Floating bookmark button */}
       <Button 
         size="sm" 
         variant="ghost" 
-        className="absolute top-4 right-4 z-10 h-8 w-8 p-0 bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm border border-white/20 dark:border-gray-700/20 rounded-full opacity-0 group-hover:opacity-100 transition-all duration-300 hover:bg-white dark:hover:bg-gray-700"
+        className="absolute top-3 right-3 z-10 h-8 w-8 p-0 bg-white/90 dark:bg-gray-800/90 backdrop-blur-sm border border-gray-200 dark:border-gray-700 rounded-lg opacity-0 group-hover:opacity-100 transition-all duration-300 hover:bg-white dark:hover:bg-gray-700"
       >
-        <Bookmark className="h-4 w-4" />
+        <Bookmark className="h-4 w-4 text-gray-600 dark:text-gray-400" />
       </Button>
 
-      <CardHeader className="pb-3 relative">
+      <CardHeader className="pb-4">
         {project.image && (
-          <div className="w-full h-48 rounded-xl overflow-hidden mb-6 relative">
+          <div className="w-full h-40 rounded-lg overflow-hidden mb-4 relative">
             <img 
               src={project.image} 
               alt={project.title}
-              className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+              className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent"></div>
-            <div className="absolute bottom-3 left-3">
-              <Badge className={`${statusColors[project.status as keyof typeof statusColors]} text-xs font-semibold px-3 py-1 shadow-lg`}>
+            <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent"></div>
+            <div className="absolute bottom-2 left-2">
+              <Badge className={`${statusColors[project.status as keyof typeof statusColors]} text-xs font-medium px-2 py-1`}>
                 {project.status}
               </Badge>
             </div>
           </div>
         )}
         
-        <div className="space-y-4">
-          <div>
-            <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-3 line-clamp-2 leading-tight">
-              {project.title}
-            </h3>
-            
-            <DropdownMenu>
-              <DropdownMenuTrigger asChild>
-                <Button 
-                  variant="outline" 
-                  size="sm" 
-                  className="w-full bg-gradient-to-r from-orange-500 to-red-500 hover:from-orange-600 hover:to-red-600 text-white border-0 shadow-md hover:shadow-lg transition-all duration-300"
-                >
-                  <UserPlus className="h-4 w-4 mr-2" />
-                  Ver Funções Abertas
-                  <ChevronDown className="h-4 w-4 ml-2" />
-                </Button>
-              </DropdownMenuTrigger>
-              <DropdownMenuContent align="center" className="w-72 bg-white/95 dark:bg-gray-800/95 backdrop-blur-xl border border-white/20 dark:border-gray-700/20 shadow-2xl rounded-2xl p-4">
-                <div className="space-y-3">
-                  <div className="text-sm font-semibold text-gray-900 dark:text-white mb-3 flex items-center">
-                    <Users className="h-4 w-4 mr-2 text-orange-500" />
-                    Funções Necessárias
-                  </div>
-                  {project.needed.map((role, index) => (
-                    <DropdownMenuItem key={index} className="cursor-pointer p-3 rounded-xl hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors">
-                      <div className="flex items-center justify-between w-full">
-                        <span className="text-sm font-medium">{role}</span>
-                        <div className="flex items-center space-x-2">
-                          <Badge variant="outline" className="text-xs bg-green-100 text-green-700 border-green-200">
-                            Aberta
-                          </Badge>
-                          <Star className="h-3 w-3 text-yellow-500" />
-                        </div>
-                      </div>
-                    </DropdownMenuItem>
-                  ))}
-                </div>
-              </DropdownMenuContent>
-            </DropdownMenu>
-          </div>
+        <div className="space-y-3">
+          <h3 className="text-lg font-semibold text-gray-900 dark:text-white line-clamp-2 leading-tight">
+            {project.title}
+          </h3>
+          
+          <p className="text-gray-600 dark:text-gray-300 text-sm leading-relaxed line-clamp-2">
+            {project.description}
+          </p>
         </div>
       </CardHeader>
 
-      <CardContent className="pt-0 space-y-6">
-        <p className="text-gray-600 dark:text-gray-300 text-sm leading-relaxed line-clamp-3">
-          {project.description}
-        </p>
-
-        <div className="flex flex-wrap gap-2">
-          {project.tags.map((tag, index) => (
+      <CardContent className="pt-0 space-y-4">
+        <div className="flex flex-wrap gap-1">
+          {project.tags.slice(0, 3).map((tag, index) => (
             <Badge 
               key={index} 
               variant="secondary" 
-              className="text-xs bg-gradient-to-r from-gray-100 to-gray-200 dark:from-gray-700 dark:to-gray-600 text-gray-700 dark:text-gray-300 border-0 hover:from-gray-200 hover:to-gray-300 dark:hover:from-gray-600 dark:hover:to-gray-500 transition-all duration-300"
+              className="text-xs bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 border-0"
             >
               {tag}
             </Badge>
           ))}
         </div>
 
-        <div className="flex items-center justify-between p-4 bg-gradient-to-r from-gray-50 to-gray-100 dark:from-gray-800 dark:to-gray-700 rounded-xl">
-          <div className="flex items-center space-x-4 text-sm text-gray-600 dark:text-gray-400">
+        <div className="flex items-center justify-between p-3 bg-gray-50 dark:bg-gray-800 rounded-lg">
+          <div className="flex items-center space-x-3 text-sm text-gray-600 dark:text-gray-400">
             <div className="flex items-center space-x-1">
-              <Users className="h-4 w-4 text-orange-500" />
-              <span className="font-medium">{project.members} membros</span>
+              <Users className="h-4 w-4" />
+              <span>{project.members}</span>
             </div>
             <div className="flex items-center space-x-1">
-              <Clock className="h-4 w-4 text-blue-500" />
-              <span className="font-medium">{project.category}</span>
+              <Clock className="h-4 w-4" />
+              <span>{project.category}</span>
             </div>
           </div>
         </div>
 
-        <Link to={`/project/${project.id}`} className="block">
-          <Button className="w-full bg-gradient-to-r from-orange-500 to-red-500 hover:from-orange-600 hover:to-red-600 text-white border-0 shadow-lg hover:shadow-xl transition-all duration-300 rounded-xl py-3 font-semibold">
-            Explorar Projeto
-          </Button>
-        </Link>
+        <div className="flex gap-2">
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Button 
+                variant="outline" 
+                size="sm" 
+                className="flex-1 border-gray-300 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-800"
+              >
+                <UserPlus className="h-4 w-4 mr-2" />
+                Ver Funções
+                <ChevronDown className="h-4 w-4 ml-2" />
+              </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align="center" className="w-64 bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800">
+              <div className="p-3">
+                <div className="text-sm font-medium text-gray-900 dark:text-white mb-2 flex items-center">
+                  <Users className="h-4 w-4 mr-2" />
+                  Funções Necessárias
+                </div>
+                {project.needed.map((role, index) => (
+                  <DropdownMenuItem key={index} className="p-2 rounded-md">
+                    <div className="flex items-center justify-between w-full">
+                      <span className="text-sm">{role}</span>
+                      <Badge variant="outline" className="text-xs bg-green-50 text-green-700 border-green-200">
+                        Aberta
+                      </Badge>
+                    </div>
+                  </DropdownMenuItem>
+                ))}
+              </div>
+            </DropdownMenuContent>
+          </DropdownMenu>
+
+          <Link to={`/project/${project.id}`}>
+            <Button className="bg-slate-900 hover:bg-slate-800 text-white">
+              Ver Mais
+            </Button>
+          </Link>
+        </div>
       </CardContent>
     </Card>
   );
