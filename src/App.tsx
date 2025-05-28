@@ -1,4 +1,3 @@
-
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -13,6 +12,8 @@ import ProjectChat from "./pages/ProjectChat";
 import ProjectProgress from "./pages/ProjectProgress";
 import ProjectSettings from "./pages/ProjectSettings";
 import NotFound from "./pages/NotFound";
+import ProjectEquity from "./pages/ProjectEquity";
+import CreateStartup from "./pages/CreateStartup";
 
 const queryClient = new QueryClient();
 
@@ -26,9 +27,11 @@ const App = () => (
           <Routes>
             <Route path="/" element={<Index />} />
             <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/create-startup" element={<CreateStartup />} />
             <Route path="/project/:id" element={<ProjectDetails />} />
             <Route path="/project/:id/chat" element={<ProjectChat />} />
             <Route path="/project/:id/progress" element={<ProjectProgress />} />
+            <Route path="/project/:id/equity" element={<ProjectEquity />} />
             <Route path="/project/:id/settings" element={<ProjectSettings />} />
             <Route path="/profile" element={<UserProfile />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}

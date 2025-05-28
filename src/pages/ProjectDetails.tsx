@@ -41,6 +41,12 @@ const ProjectDetails = () => {
                     Progresso
                   </Button>
                 </Link>
+                <Link to={`/project/${id}/equity`}>
+                  <Button variant="outline">
+                    <Users className="h-4 w-4 mr-2" />
+                    Equity
+                  </Button>
+                </Link>
                 <Link to={`/project/${id}/settings`}>
                   <Button variant="outline">
                     <Settings className="h-4 w-4 mr-2" />

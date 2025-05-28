@@ -1,4 +1,3 @@
-
 import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -13,6 +12,8 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { Link } from "react-router-dom";
+import Plus from "lucide-react";
 
 const Dashboard = () => {
   const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid');
@@ -98,12 +99,28 @@ const Dashboard = () => {
         <div className="container mx-auto px-4 py-6">
           {/* Page Header */}
           <div className="mb-8">
-            <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-2">
-              Descobrir Projetos
-            </h1>
-            <p className="text-gray-600 dark:text-gray-400">
-              Encontre projetos incríveis para colaborar e desenvolver suas habilidades
-            </p>
+            <div className="flex justify-between items-start">
+              <div>
+                <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-2">
+                  Descobrir Projetos
+                </h1>
+                <p className="text-gray-600 dark:text-gray-400">
+                  Encontre projetos incríveis para colaborar e desenvolver suas habilidades
+                </p>
+              </div>
+              
+              <div className="flex gap-3">
+                <Link to="/create-startup">
+                  <Button className="bg-gradient-to-r from-orange-500 to-red-500 hover:from-orange-600 hover:to-red-600 text-white">
+                    <Plus className="h-4 w-4 mr-2" />
+                    Criar Minha Ideia
+                  </Button>
+                </Link>
+                <Button variant="outline">
+                  Meus Projetos
+                </Button>
+              </div>
+            </div>
           </div>
 
           {/* Search and Filters */}
