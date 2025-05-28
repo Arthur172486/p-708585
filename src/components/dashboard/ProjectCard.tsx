@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { ChevronDown, Users, ArrowRight, User } from "lucide-react";
+import { Link } from "react-router-dom";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -44,12 +45,11 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
 
   const handleApply = (role: string) => {
     setAppliedRole(role);
-    // Aqui você pode adicionar lógica para enviar a candidatura
     console.log(`Candidatura enviada para ${role} no projeto ${project.title}`);
   };
 
   return (
-    <Card className="bg-gray-800 border-gray-700 hover:border-orange-500 transition-all duration-300 group overflow-hidden">
+    <Card className="bg-gray-800 dark:bg-gray-800 border-gray-700 dark:border-gray-700 hover:border-orange-500 transition-all duration-300 group overflow-hidden">
       <div className="relative">
         <img 
           src={project.image} 
@@ -110,12 +110,14 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
           </div>
           
           <div className="flex space-x-2 pt-2">
-            <Button 
-              className="flex-1 bg-orange-500 hover:bg-orange-600 text-white"
-              size="sm"
-            >
-              Ver Detalhes <ArrowRight className="h-4 w-4 ml-1" />
-            </Button>
+            <Link to={`/project/${project.id}`} className="flex-1">
+              <Button 
+                className="w-full bg-orange-500 hover:bg-orange-600 text-white"
+                size="sm"
+              >
+                Ver Detalhes <ArrowRight className="h-4 w-4 ml-1" />
+              </Button>
+            </Link>
             
             {appliedRole ? (
               <Button 
