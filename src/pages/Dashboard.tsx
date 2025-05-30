@@ -22,59 +22,110 @@ const Dashboard = () => {
 
   const projects = [
     {
-      id: 1,
+      id: "1",
       title: "EcoTrack VR",
       description: "Virtual reality company which offers unique approach to be the future of environmental monitoring and sustainability education through immersive experiences.",
-      category: "VR/AR",
-      status: "Recruiting",
-      members: 8,
-      needed: ["Frontend Developer", "UX Designer", "3D Artist"],
-      image: "/lovable-uploads/af412c03-21e4-4856-82ff-d1a975dc84a9.png",
-      tags: ["React", "Three.js", "WebXR", "Sustainability"]
+      progress: 75,
+      dueDate: "2024-02-15",
+      members: [
+        { id: "1", name: "João Silva" },
+        { id: "2", name: "Maria Santos" },
+        { id: "3", name: "Pedro Costa" },
+        { id: "4", name: "Ana Lima" },
+        { id: "5", name: "Carlos Oliveira" },
+        { id: "6", name: "Sofia Reis" },
+        { id: "7", name: "Bruno Alves" },
+        { id: "8", name: "Carla Ferreira" }
+      ],
+      status: "active" as const,
+      category: "VR/AR"
     },
     {
-      id: 2,
+      id: "2",
       title: "HealthAI Assistant",
       description: "AI-powered health monitoring system that provides personalized recommendations and early disease detection through machine learning algorithms.",
-      category: "IA/ML",
-      status: "Active",
-      members: 12,
-      needed: ["ML Engineer", "Data Scientist"],
-      image: "/lovable-uploads/c3d5522b-6886-4b75-8ffc-d020016bb9c2.png",
-      tags: ["Python", "TensorFlow", "Healthcare", "AI"]
+      progress: 60,
+      dueDate: "2024-03-01",
+      members: [
+        { id: "9", name: "Ricardo Santos" },
+        { id: "10", name: "Lucia Fernandes" },
+        { id: "11", name: "Miguel Costa" },
+        { id: "12", name: "Patricia Silva" },
+        { id: "13", name: "Fernando Lima" },
+        { id: "14", name: "Sandra Oliveira" },
+        { id: "15", name: "Roberto Alves" },
+        { id: "16", name: "Mariana Reis" },
+        { id: "17", name: "Carlos Eduardo" },
+        { id: "18", name: "Ana Paula" },
+        { id: "19", name: "José Silva" },
+        { id: "20", name: "Maria Fernanda" }
+      ],
+      status: "active" as const,
+      category: "IA/ML"
     },
     {
-      id: 3,
+      id: "3",
       title: "CryptoWallet Pro",
       description: "Next-generation cryptocurrency wallet with advanced security features, DeFi integration, and multi-chain support for seamless transactions.",
-      category: "Blockchain",
-      status: "Funding",
-      members: 6,
-      needed: ["Blockchain Developer", "Security Expert", "UI Designer"],
-      image: "/lovable-uploads/dc13e94f-beeb-4671-8a22-0968498cdb4c.png",
-      tags: ["Solidity", "Web3", "DeFi", "Security"]
+      progress: 40,
+      dueDate: "2024-04-15",
+      members: [
+        { id: "21", name: "André Santos" },
+        { id: "22", name: "Beatriz Lima" },
+        { id: "23", name: "Gustavo Costa" },
+        { id: "24", name: "Isabella Silva" },
+        { id: "25", name: "Leonardo Oliveira" },
+        { id: "26", name: "Camila Ferreira" }
+      ],
+      status: "active" as const,
+      category: "Blockchain"
     },
     {
-      id: 4,
+      id: "4",
       title: "EduLearn Platform",
       description: "Comprehensive online learning platform with interactive courses, real-time collaboration, and AI-powered personalized learning paths.",
-      category: "EdTech",
-      status: "Recruiting",
-      members: 15,
-      needed: ["Full Stack Developer", "DevOps Engineer"],
-      image: "/lovable-uploads/5663820f-6c97-4492-9210-9eaa1a8dc415.png",
-      tags: ["Node.js", "React", "PostgreSQL", "Education"]
+      progress: 85,
+      dueDate: "2024-01-30",
+      members: [
+        { id: "27", name: "Felipe Santos" },
+        { id: "28", name: "Gabriela Lima" },
+        { id: "29", name: "Hugo Costa" },
+        { id: "30", name: "Julia Silva" },
+        { id: "31", name: "Kevin Oliveira" },
+        { id: "32", name: "Larissa Ferreira" },
+        { id: "33", name: "Marcos Santos" },
+        { id: "34", name: "Natalia Lima" },
+        { id: "35", name: "Otavio Costa" },
+        { id: "36", name: "Paula Silva" },
+        { id: "37", name: "Rafael Oliveira" },
+        { id: "38", name: "Samara Ferreira" },
+        { id: "39", name: "Thiago Santos" },
+        { id: "40", name: "Vanessa Lima" },
+        { id: "41", name: "Wagner Costa" }
+      ],
+      status: "completed" as const,
+      category: "EdTech"
     },
     {
-      id: 5,
+      id: "5",
       title: "GreenCity IoT",
       description: "Smart city solution using IoT sensors to monitor air quality, traffic, and energy consumption for sustainable urban development.",
-      category: "IoT",
-      status: "Active",
-      members: 10,
-      needed: ["IoT Developer", "Mobile Developer"],
-      image: "/lovable-uploads/22d31f51-c174-40a7-bd95-00e4ad00eaf3.png",
-      tags: ["IoT", "Arduino", "React Native", "Sustainability"]
+      progress: 55,
+      dueDate: "2024-05-20",
+      members: [
+        { id: "42", name: "Alice Santos" },
+        { id: "43", name: "Bruno Lima" },
+        { id: "44", name: "Carolina Costa" },
+        { id: "45", name: "Diego Silva" },
+        { id: "46", name: "Elena Oliveira" },
+        { id: "47", name: "Fabio Ferreira" },
+        { id: "48", name: "Giovana Santos" },
+        { id: "49", name: "Henrique Lima" },
+        { id: "50", name: "Ingrid Costa" },
+        { id: "51", name: "João Pedro Silva" }
+      ],
+      status: "active" as const,
+      category: "IoT"
     }
   ];
 
