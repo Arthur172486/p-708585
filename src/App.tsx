@@ -8,6 +8,9 @@ import { ThemeProvider } from "@/contexts/ThemeContext";
 import Index from "./pages/Index";
 import Login from "./pages/Login";
 import Dashboard from "./pages/Dashboard";
+import MyProjects from "./pages/MyProjects";
+import Community from "./pages/Community";
+import Achievements from "./pages/Achievements";
 import ProjectDetails from "./pages/ProjectDetails";
 import UserProfile from "./pages/UserProfile";
 import ProjectChat from "./pages/ProjectChat";
@@ -30,6 +33,9 @@ const App = () => (
             <Route path="/" element={<Index />} />
             <Route path="/login" element={<Login />} />
             <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/my-projects" element={<MyProjects />} />
+            <Route path="/community" element={<Community />} />
+            <Route path="/achievements" element={<Achievements />} />
             <Route path="/create-startup" element={<CreateStartup />} />
             <Route path="/project/:id" element={<ProjectDetails />} />
             <Route path="/project/:id/chat" element={<ProjectChat />} />

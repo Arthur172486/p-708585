@@ -1,155 +1,142 @@
 
 import React from "react";
-import { Card, CardContent, CardHeader } from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
-import { Users, Clock, ChevronDown, UserPlus, Star, Bookmark, Eye } from "lucide-react";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Calendar, Users, MoreHorizontal, TrendingUp, Clock, Target } from "lucide-react";
 import { Link } from "react-router-dom";
 
-interface Project {
-  id: number;
-  title: string;
-  description: string;
-  category: string;
-  status: string;
-  members: number;
-  needed: string[];
-  image?: string;
-  tags: string[];
-}
-
 interface ProjectCardProps {
-  project: Project;
+  project: {
+    id: string;
+    title: string;
+    description: string;
+    progress: number;
+    dueDate: string;
+    members: Array<{
+      id: string;
+      name: string;
+      avatar?: string;
+    }>;
+    status: 'active' | 'completed' | 'paused';
+    category: string;
+  };
 }
 
-const ProjectCard = ({ project }: ProjectCardProps) => {
-  const statusColors = {
-    Recruiting: "bg-emerald-500/90 text-white",
-    Active: "bg-blue-500/90 text-white",
-    Funding: "bg-purple-500/90 text-white"
+const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
+  const getStatusColor = (status: string) => {
+    switch (status) {
+      case 'active':
+        return 'bg-orange-100 text-orange-600 border-orange-200';
+      case 'completed':
+        return 'bg-green-100 text-green-600 border-green-200';
+      case 'paused':
+        return 'bg-gray-100 text-gray-600 border-gray-200';
+      default:
+        return 'bg-orange-100 text-orange-600 border-orange-200';
+    }
   };
 
-  const statusLabels = {
-    Recruiting: "Recrutando",
-    Active: "Ativo", 
-    Funding: "Financiamento"
+  const getStatusText = (status: string) => {
+    switch (status) {
+      case 'active':
+        return 'Ativo';
+      case 'completed':
+        return 'Concluído';
+      case 'paused':
+        return 'Pausado';
+      default:
+        return 'Ativo';
+    }
   };
 
   return (
-    <Card className="group relative bg-slate-800/50 backdrop-blur-sm border border-slate-700/50 hover:border-slate-600/50 transition-all duration-500 hover:-translate-y-1 overflow-hidden">
-      {/* Image Section */}
-      {project.image && (
-        <div className="relative h-48 overflow-hidden">
-          <img 
-            src={project.image} 
-            alt={project.title}
-            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
-          />
-          {/* Overlay Gradient */}
-          <div className="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-transparent to-transparent"></div>
-          
-          {/* Status Badge */}
-          <div className="absolute top-4 left-4">
-            <Badge className={`${statusColors[project.status as keyof typeof statusColors]} px-3 py-1 text-sm font-medium`}>
-              {statusLabels[project.status as keyof typeof statusLabels]}
+    <Card className="group bg-white border-orange-200 hover:border-orange-300 hover:shadow-lg transition-all duration-300 overflow-hidden">
+      <CardHeader className="pb-3">
+        <div className="flex items-start justify-between">
+          <div className="space-y-2">
+            <Badge className={`${getStatusColor(project.status)} text-xs font-medium`}>
+              {getStatusText(project.status)}
             </Badge>
+            <CardTitle className="text-lg font-semibold text-gray-800 group-hover:text-orange-600 transition-colors">
+              <Link to={`/project/${project.id}`} className="hover:underline">
+                {project.title}
+              </Link>
+            </CardTitle>
           </div>
-          
-          {/* Bookmark Button */}
-          <Button 
-            size="sm" 
-            variant="ghost" 
-            className="absolute top-4 right-4 h-8 w-8 p-0 bg-black/30 backdrop-blur-sm border border-white/20 rounded-full opacity-0 group-hover:opacity-100 transition-all duration-300 hover:bg-black/50"
-          >
-            <Bookmark className="h-4 w-4 text-white" />
+          <Button variant="ghost" size="sm" className="opacity-0 group-hover:opacity-100 transition-opacity hover:bg-orange-50">
+            <MoreHorizontal className="h-4 w-4 text-gray-500" />
           </Button>
-        </div>
-      )}
-
-      <CardHeader className="pb-4">
-        <div className="space-y-3">
-          <h3 className="text-xl font-bold text-white leading-tight line-clamp-2">
-            {project.title}
-          </h3>
-          
-          <p className="text-slate-300 text-sm leading-relaxed line-clamp-3">
-            {project.description}
-          </p>
         </div>
       </CardHeader>
 
-      <CardContent className="pt-0 space-y-4">
-        {/* Tags */}
-        <div className="flex flex-wrap gap-2">
-          {project.tags.map((tag, index) => (
-            <Badge 
-              key={index} 
-              variant="secondary" 
-              className="text-xs bg-slate-700/50 text-slate-300 border-slate-600/50 hover:bg-slate-600/50 transition-colors"
-            >
-              {tag}
-            </Badge>
-          ))}
-        </div>
+      <CardContent className="space-y-4">
+        <p className="text-sm text-gray-600 line-clamp-2">
+          {project.description}
+        </p>
 
-        {/* Stats */}
-        <div className="flex items-center justify-between p-3 bg-slate-700/30 rounded-lg border border-slate-600/30">
-          <div className="flex items-center space-x-4 text-sm text-slate-400">
-            <div className="flex items-center space-x-2">
-              <Users className="h-4 w-4 text-orange-400" />
-              <span className="text-slate-300">{project.members} membros</span>
-            </div>
-            <div className="flex items-center space-x-2">
-              <Clock className="h-4 w-4 text-blue-400" />
-              <span className="text-slate-300">{project.category}</span>
-            </div>
+        {/* Progress */}
+        <div className="space-y-2">
+          <div className="flex justify-between items-center">
+            <span className="text-sm font-medium text-gray-700">Progresso</span>
+            <span className="text-sm font-semibold text-orange-600">{project.progress}%</span>
+          </div>
+          <div className="w-full bg-orange-100 rounded-full h-2">
+            <div 
+              className="bg-orange-500 h-2 rounded-full transition-all duration-500 ease-out"
+              style={{ width: `${project.progress}%` }}
+            ></div>
           </div>
         </div>
 
-        {/* Action Buttons */}
-        <div className="space-y-2">
-          <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-              <Button 
-                variant="outline" 
-                size="sm" 
-                className="w-full bg-orange-500/10 border-orange-500/30 text-orange-400 hover:bg-orange-500/20 hover:border-orange-500/50 transition-all duration-300"
-              >
-                <UserPlus className="h-4 w-4 mr-2" />
-                Ver Funções Abertas
-                <ChevronDown className="h-4 w-4 ml-2" />
-              </Button>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent align="center" className="w-72 bg-slate-800/95 backdrop-blur-xl border border-slate-700/50 shadow-2xl rounded-xl p-3">
-              <div className="space-y-2">
-                <div className="text-sm font-semibold text-white mb-3 flex items-center">
-                  <Users className="h-4 w-4 mr-2 text-orange-400" />
-                  Funções Necessárias
+        {/* Members */}
+        <div className="flex items-center justify-between">
+          <div className="flex items-center space-x-2">
+            <Users className="h-4 w-4 text-gray-500" />
+            <div className="flex -space-x-2">
+              {project.members.slice(0, 3).map((member, index) => (
+                <Avatar key={member.id} className="w-6 h-6 border-2 border-white">
+                  {member.avatar ? (
+                    <AvatarImage src={member.avatar} alt={member.name} />
+                  ) : (
+                    <AvatarFallback className="bg-orange-100 text-orange-600 text-xs">
+                      {member.name.split(' ').map(n => n[0]).join('')}
+                    </AvatarFallback>
+                  )}
+                </Avatar>
+              ))}
+              {project.members.length > 3 && (
+                <div className="w-6 h-6 bg-orange-100 border-2 border-white rounded-full flex items-center justify-center">
+                  <span className="text-xs font-medium text-orange-600">
+                    +{project.members.length - 3}
+                  </span>
                 </div>
-                {project.needed.map((role, index) => (
-                  <DropdownMenuItem key={index} className="cursor-pointer p-3 rounded-lg hover:bg-slate-700/50 transition-colors">
-                    <div className="flex items-center justify-between w-full">
-                      <span className="text-sm font-medium text-slate-200">{role}</span>
-                      <div className="flex items-center space-x-2">
-                        <Badge variant="outline" className="text-xs bg-emerald-500/20 text-emerald-400 border-emerald-500/30">
-                          Aberta
-                        </Badge>
-                        <Star className="h-3 w-3 text-yellow-400" />
-                      </div>
-                    </div>
-                  </DropdownMenuItem>
-                ))}
-              </div>
-            </DropdownMenuContent>
-          </DropdownMenu>
+              )}
+            </div>
+          </div>
 
-          <Link to={`/project/${project.id}`} className="block">
-            <Button className="w-full bg-gradient-to-r from-orange-500 to-red-500 hover:from-orange-600 hover:to-red-600 text-white border-0 shadow-lg hover:shadow-xl transition-all duration-300 py-3 font-semibold">
-              <Eye className="h-4 w-4 mr-2" />
-              Explorar Projeto
-            </Button>
-          </Link>
+          <div className="flex items-center text-xs text-gray-500">
+            <Calendar className="h-3 w-3 mr-1" />
+            {new Date(project.dueDate).toLocaleDateString('pt-BR')}
+          </div>
+        </div>
+
+        {/* Category and Stats */}
+        <div className="flex items-center justify-between pt-3 border-t border-orange-100">
+          <Badge variant="outline" className="text-xs border-orange-200 text-orange-600">
+            {project.category}
+          </Badge>
+          <div className="flex items-center space-x-3 text-xs text-gray-500">
+            <div className="flex items-center">
+              <Clock className="h-3 w-3 mr-1" />
+              <span>2d</span>
+            </div>
+            <div className="flex items-center">
+              <TrendingUp className="h-3 w-3 mr-1 text-orange-500" />
+              <span className="text-orange-600">+12%</span>
+            </div>
+          </div>
         </div>
       </CardContent>
     </Card>
