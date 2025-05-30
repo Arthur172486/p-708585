@@ -1,10 +1,10 @@
 
 import React from "react";
 import { useParams, Link } from "react-router-dom";
-import { Card, CardContent, CardHeader } from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
-import { ArrowLeft, Calendar, CheckCircle, Clock, AlertCircle } from "lucide-react";
+import { ArrowLeft, Calendar, CheckCircle, Clock, AlertCircle, Users, Trophy, TrendingUp } from "lucide-react";
 import GlassHeader from "@/components/ui/glass-header";
 
 const ProjectProgress = () => {
@@ -61,138 +61,166 @@ const ProjectProgress = () => {
   const getStatusIcon = (status: string) => {
     switch (status) {
       case 'completed':
-        return <CheckCircle className="h-5 w-5 text-green-500" />;
+        return <CheckCircle className="h-5 w-5 text-emerald-500" />;
       case 'in-progress':
         return <Clock className="h-5 w-5 text-orange-500" />;
       default:
-        return <AlertCircle className="h-5 w-5 text-gray-400" />;
+        return <AlertCircle className="h-5 w-5 text-slate-400" />;
     }
   };
 
   const getStatusColor = (status: string) => {
     switch (status) {
       case 'completed':
-        return 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200';
+        return 'bg-emerald-500/20 text-emerald-400 border-emerald-500/30';
       case 'in-progress':
-        return 'bg-orange-100 text-orange-800 dark:bg-orange-900 dark:text-orange-200';
+        return 'bg-orange-500/20 text-orange-400 border-orange-500/30';
       default:
-        return 'bg-gray-100 text-gray-800 dark:bg-gray-700 dark:text-gray-200';
+        return 'bg-slate-500/20 text-slate-400 border-slate-500/30';
     }
   };
 
   const overallProgress = milestones.reduce((acc, milestone) => acc + milestone.progress, 0) / milestones.length;
 
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
+    <div className="min-h-screen bg-slate-900">
       <GlassHeader />
       
-      <div className="pt-16">
-        <div className="container mx-auto px-4 py-6 max-w-4xl">
+      <div className="pt-24 pb-8">
+        <div className="container mx-auto px-4 max-w-6xl">
           {/* Header */}
-          <Card className="mb-6 bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm border-white/20 dark:border-gray-700/20">
+          <div className="flex items-center justify-between mb-8">
+            <div className="flex items-center space-x-4">
+              <Link to={`/project/${id}`}>
+                <Button variant="ghost" size="sm" className="text-slate-400 hover:text-white">
+                  <ArrowLeft className="h-4 w-4 mr-2" />
+                  Voltar
+                </Button>
+              </Link>
+              <div>
+                <h1 className="text-3xl font-bold text-white">
+                  Progresso - EcoTrack VR
+                </h1>
+                <p className="text-slate-400">
+                  Acompanhe o desenvolvimento do projeto
+                </p>
+              </div>
+            </div>
+          </div>
+
+          {/* Progress Overview */}
+          <div className="grid grid-cols-1 lg:grid-cols-4 gap-6 mb-8">
+            <Card className="bg-slate-800/50 border-slate-700/50 backdrop-blur-sm">
+              <CardContent className="p-6 text-center">
+                <div className="flex items-center justify-center mb-4">
+                  <div className="w-16 h-16 bg-emerald-500/20 rounded-full flex items-center justify-center">
+                    <TrendingUp className="h-8 w-8 text-emerald-400" />
+                  </div>
+                </div>
+                <div className="text-3xl font-bold text-emerald-400 mb-2">
+                  {Math.round(overallProgress)}%
+                </div>
+                <div className="text-sm text-slate-400">Progresso Geral</div>
+                <Progress value={overallProgress} className="mt-3 h-2" />
+              </CardContent>
+            </Card>
+
+            <Card className="bg-slate-800/50 border-slate-700/50 backdrop-blur-sm">
+              <CardContent className="p-6 text-center">
+                <div className="flex items-center justify-center mb-4">
+                  <div className="w-16 h-16 bg-green-500/20 rounded-full flex items-center justify-center">
+                    <CheckCircle className="h-8 w-8 text-green-400" />
+                  </div>
+                </div>
+                <div className="text-3xl font-bold text-green-400 mb-2">
+                  {milestones.filter(m => m.status === 'completed').length}
+                </div>
+                <div className="text-sm text-slate-400">Marcos Concluídos</div>
+              </CardContent>
+            </Card>
+
+            <Card className="bg-slate-800/50 border-slate-700/50 backdrop-blur-sm">
+              <CardContent className="p-6 text-center">
+                <div className="flex items-center justify-center mb-4">
+                  <div className="w-16 h-16 bg-orange-500/20 rounded-full flex items-center justify-center">
+                    <Clock className="h-8 w-8 text-orange-400" />
+                  </div>
+                </div>
+                <div className="text-3xl font-bold text-orange-400 mb-2">
+                  {milestones.filter(m => m.status === 'in-progress').length}
+                </div>
+                <div className="text-sm text-slate-400">Em Andamento</div>
+              </CardContent>
+            </Card>
+
+            <Card className="bg-slate-800/50 border-slate-700/50 backdrop-blur-sm">
+              <CardContent className="p-6 text-center">
+                <div className="flex items-center justify-center mb-4">
+                  <div className="w-16 h-16 bg-blue-500/20 rounded-full flex items-center justify-center">
+                    <Users className="h-8 w-8 text-blue-400" />
+                  </div>
+                </div>
+                <div className="text-3xl font-bold text-blue-400 mb-2">8</div>
+                <div className="text-sm text-slate-400">Membros Ativos</div>
+              </CardContent>
+            </Card>
+          </div>
+
+          {/* Timeline */}
+          <Card className="bg-slate-800/50 border-slate-700/50 backdrop-blur-sm mb-8">
             <CardHeader>
-              <div className="flex items-center justify-between">
-                <div className="flex items-center space-x-4">
-                  <Link to={`/project/${id}`}>
-                    <Button variant="ghost" size="sm">
-                      <ArrowLeft className="h-4 w-4 mr-2" />
-                      Voltar
-                    </Button>
-                  </Link>
-                  <div>
-                    <h1 className="text-2xl font-bold text-gray-900 dark:text-white">
-                      Progresso - EcoTrack VR
-                    </h1>
-                    <p className="text-gray-500 dark:text-gray-400">
-                      Acompanhe o desenvolvimento do projeto
-                    </p>
-                  </div>
-                </div>
-              </div>
+              <CardTitle className="text-white text-xl flex items-center">
+                <Trophy className="h-6 w-6 mr-2 text-orange-500" />
+                Marcos do Projeto
+              </CardTitle>
             </CardHeader>
-          </Card>
-
-          {/* Overall Progress */}
-          <Card className="mb-6 bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm border-white/20 dark:border-gray-700/20">
-            <CardContent className="p-6">
-              <div className="text-center space-y-4">
-                <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
-                  Progresso Geral
-                </h3>
-                <div className="space-y-2">
-                  <div className="flex justify-between text-sm text-gray-600 dark:text-gray-400">
-                    <span>Concluído</span>
-                    <span>{Math.round(overallProgress)}%</span>
-                  </div>
-                  <Progress value={overallProgress} className="h-3" />
-                </div>
-                <div className="grid grid-cols-3 gap-4 pt-4">
-                  <div className="text-center">
-                    <div className="text-2xl font-bold text-green-500">
-                      {milestones.filter(m => m.status === 'completed').length}
-                    </div>
-                    <div className="text-sm text-gray-500 dark:text-gray-400">Concluídas</div>
-                  </div>
-                  <div className="text-center">
-                    <div className="text-2xl font-bold text-orange-500">
-                      {milestones.filter(m => m.status === 'in-progress').length}
-                    </div>
-                    <div className="text-sm text-gray-500 dark:text-gray-400">Em Andamento</div>
-                  </div>
-                  <div className="text-center">
-                    <div className="text-2xl font-bold text-gray-400">
-                      {milestones.filter(m => m.status === 'pending').length}
-                    </div>
-                    <div className="text-sm text-gray-500 dark:text-gray-400">Pendentes</div>
-                  </div>
-                </div>
-              </div>
-            </CardContent>
-          </Card>
-
-          {/* Milestones */}
-          <div className="space-y-4">
-            <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
-              Marcos do Projeto
-            </h3>
-            {milestones.map((milestone, index) => (
-              <Card key={milestone.id} className="bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm border-white/20 dark:border-gray-700/20">
-                <CardContent className="p-6">
+            <CardContent className="space-y-6">
+              {milestones.map((milestone, index) => (
+                <div key={milestone.id} className="relative">
+                  {index < milestones.length - 1 && (
+                    <div className="absolute left-6 top-12 w-0.5 h-16 bg-slate-700"></div>
+                  )}
+                  
                   <div className="flex items-start space-x-4">
-                    <div className="flex-shrink-0 mt-1">
-                      {getStatusIcon(milestone.status)}
+                    <div className="flex-shrink-0 mt-1 relative z-10">
+                      <div className={`w-12 h-12 rounded-full flex items-center justify-center ${
+                        milestone.status === 'completed' ? 'bg-emerald-500/20' :
+                        milestone.status === 'in-progress' ? 'bg-orange-500/20' : 'bg-slate-500/20'
+                      }`}>
+                        {getStatusIcon(milestone.status)}
+                      </div>
                     </div>
-                    <div className="flex-1 space-y-3">
-                      <div className="flex items-center justify-between">
-                        <div>
-                          <h4 className="font-semibold text-gray-900 dark:text-white">
-                            {milestone.title}
-                          </h4>
-                          <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">
-                            {milestone.description}
-                          </p>
-                        </div>
-                        <span className={`px-3 py-1 rounded-full text-xs font-medium ${getStatusColor(milestone.status)}`}>
+                    
+                    <div className="flex-1 min-w-0">
+                      <div className="flex items-center justify-between mb-2">
+                        <h4 className="font-semibold text-white text-lg">
+                          {milestone.title}
+                        </h4>
+                        <span className={`px-3 py-1 rounded-full text-xs font-medium border ${getStatusColor(milestone.status)}`}>
                           {milestone.status === 'completed' ? 'Concluído' : 
                            milestone.status === 'in-progress' ? 'Em Andamento' : 'Pendente'}
                         </span>
                       </div>
                       
-                      <div className="space-y-2">
-                        <div className="flex justify-between text-sm text-gray-600 dark:text-gray-400">
+                      <p className="text-slate-400 mb-4">
+                        {milestone.description}
+                      </p>
+                      
+                      <div className="space-y-3">
+                        <div className="flex justify-between text-sm text-slate-400">
                           <span>Progresso</span>
                           <span>{milestone.progress}%</span>
                         </div>
                         <Progress value={milestone.progress} className="h-2" />
                       </div>
 
-                      <div className="flex items-center space-x-4 text-sm text-gray-500 dark:text-gray-400">
+                      <div className="flex items-center space-x-4 mt-4 text-sm text-slate-400">
                         <div className="flex items-center space-x-1">
                           <Calendar className="h-4 w-4" />
                           <span>Prazo: {new Date(milestone.dueDate).toLocaleDateString('pt-BR')}</span>
                         </div>
                         {milestone.completedDate && (
-                          <div className="flex items-center space-x-1 text-green-600">
+                          <div className="flex items-center space-x-1 text-emerald-400">
                             <CheckCircle className="h-4 w-4" />
                             <span>Concluído em: {new Date(milestone.completedDate).toLocaleDateString('pt-BR')}</span>
                           </div>
@@ -200,10 +228,10 @@ const ProjectProgress = () => {
                       </div>
                     </div>
                   </div>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
+                </div>
+              ))}
+            </CardContent>
+          </Card>
         </div>
       </div>
     </div>
